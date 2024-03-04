@@ -5,7 +5,7 @@ const TransferList = ({ transfers }) => (
         <tbody>
             {transfers.map((transfer, index) => (
                 <tr key={transfer.id}>
-                    <th scope="row">{index}</th>
+                    <th scope="row">{index + 1}</th>
                     <td>{transfer.description}</td>
                     <td className={transfer.mount > 0 ? "text-success": "text-danger"}>
                         {transfer.mount}

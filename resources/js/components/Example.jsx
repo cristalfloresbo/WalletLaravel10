@@ -4,9 +4,14 @@ import TransferForm from './TransferForm';
 import TransferList from './TransferList';
 
 function Example() {
-    const [ money, setMoney ] = useState(0.0);
-    const [ transfers, setTransfers] = useState([]);
-    const [ error, setError] = useState();
+    const [money, setMoney] = useState(0.0);
+    const [transfers, setTransfers] = useState([]);
+    const [error, setError] = useState();
+    const [form, setForm] = useState({
+        description: "",
+        mount: "",
+        wallet_id: 1,
+    });
 
     const loadWallet = async () => {
         try {
@@ -17,6 +22,32 @@ function Example() {
         } catch (error) {
             setError(error);
         }
+    }
+
+    const handleOnSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            let config = {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(form),
+            }
+            let res = await fetch("http://localhost:8000/api/transfer", config);
+            let data = await res.json();
+            setTransfers([data, ...transfers])
+            setMoney( parseInt(money) + parseInt(data.mount));
+            setForm({
+                description: "",
+                mount: "",
+                wallet_id: 1,
+            });
+        } catch (error) {
+            setError(error);
+        }
+        console.log("sending...");
     }
 
     useEffect(() => {
@@ -30,7 +61,7 @@ function Example() {
                     <p className='title'> $ {money}</p>
                 </div>
                 <div className="col-md-12">
-                    <TransferForm />
+                    <TransferForm form={form} setForm={setForm} onSubmit={handleOnSubmit} />
                 </div>
                 <div className="col-md-12">
                     <TransferList transfers={transfers} />

@@ -1,12 +1,14 @@
 import React from 'react';
 
-const TransferForm = () => (
-    <form className="row g-3 justify-content-center">
+const TransferForm = ({ form, setForm, onSubmit }) => (
+    <form className="row g-3 justify-content-center" onSubmit={onSubmit}>
         <div className="col-auto">
             <input
                 type="text"
                 className="form-control"
                 placeholder="Description"
+                value={form.description}
+                onChange={(e) => setForm({...form, description: e.target.value})}
             />
         </div>
         <div className="col-auto">
@@ -18,6 +20,8 @@ const TransferForm = () => (
                     type="text"
                     className="form-control"
                     name="mount"
+                    value={form.mount}
+                    onChange={(e) => setForm({...form, mount: e.target.value})}
                 />
             </div>
         </div>
