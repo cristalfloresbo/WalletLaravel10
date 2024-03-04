@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import TransferForm from './TransferForm';
 import TransferList from './TransferList';
+import url from './url';
 
 function Example() {
     const [money, setMoney] = useState(0.0);
@@ -15,7 +16,7 @@ function Example() {
 
     const loadWallet = async () => {
         try {
-            let res = await fetch("http://localhost:8000/api/wallet");
+            let res = await fetch(`${url}/api/wallet`);
             let data = await res.json();
             setMoney(data.money);
             setTransfers(data.transfers);
@@ -35,7 +36,7 @@ function Example() {
                 },
                 body: JSON.stringify(form),
             }
-            let res = await fetch("http://localhost:8000/api/transfer", config);
+            let res = await fetch(`${url}/api/transfer`, config);
             let data = await res.json();
             setTransfers([data, ...transfers])
             setMoney( parseInt(money) + parseInt(data.mount));
