@@ -17,35 +17,48 @@ function Example() {
         // </div>
         <div className="container">
             <div className="row justify-content-center">
-                <div className="col-md-12 m-t-md">
+                <div className="col-md-12">
                     <p className='title'> $ 1000 </p>
                 </div>
                 <div className="col-md-12">
-                    <form className="form-inline justify-content-center">
-                        <div className='form-group mb-2'>
+                    <form class="row g-3 justify-content-center">
+                        <div class="col-auto">
                             <input
                                 type="text"
                                 className="form-control"
                                 placeholder="Description"
                             />
                         </div>
-                        <div className="input-group mx-sm-2 mb-2">
-                            <div className="input-group-prepend">
-                                <div className="input-group-text">$</div>
+                        <div class="col-auto">
+                            <div className="input-group mx-sm-2 mb-2">
+                                <div className="input-group-prepend">
+                                    <div className="input-group-text">$</div>
+                                </div>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="mount"
+                                />
                             </div>
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="mount"
-                            />
                         </div>
-                        <button 
-                            type="submit"
-                            className="btn btn-primary mb-2"
-                        >
-                            Add
-                        </button>
+                        <div class="col-auto">
+                            <button
+                                type="submit"
+                                className="btn btn-primary mb-2"
+                            >
+                                Add
+                            </button>
+                        </div>
                     </form>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Example</td>
+                                <td>1200</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
